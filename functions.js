@@ -1,22 +1,21 @@
 function getWeather(){
 
-    let request = new XMLHttpRequest();
-    const url = `http://example.com/movies.json`;
 
-    request.onreadystatechange = function() {
-      if (this.readyState === 4 && this.status === 200) {
-        const response = JSON.parse(this.responseText);
-        getElements(response);
-      }
-    };
+  const base = `https://api.open-meteo.com/v1/forecast?latitude=56.95&longitude=24.11&hourly=temperature_2m,windspeed_10m&forecast_days=1`;
 
-    request.open("GET", url, true);
-    request.send();
+  // Using fetch to get data
+  fetch(base)
+    .then((response) => {
+      console.log(response.json());
+      // return response.json();
 
-   function getElements(response) {
-    //   $('.showHumidity').text(`The humidity in is ${response.main.humidity}%`);
-    //   $('.showTemp').text(`The temperature in Kelvins is ${response.main.temp} degrees.`);
-    }
+    })
+    // .then((data) => {
+    //   const { temp } = data.main;
+    //   const place = data.name;
+    //   const { description, icon } = data.weather[0];
+    //   const { sunrise, sunset } = data.sys;
+    // });
 
   };
 
