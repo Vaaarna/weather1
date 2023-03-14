@@ -1,1 +1,3 @@
-# weather1
+# Weather project
+
+This is a test :)
