@@ -34,6 +34,24 @@ async function getWeather() {
 
 };
 
+// Tasks:
+// 1. Adjust the "i < 23" condition to use the size of the data["hourly"]["time"] array, instead of being just 23
+// 2. Using this tutorial :https://www.geeksforgeeks.org/how-to-creating-html-list-from-javascript-array/
+//    Add a "unordered list (ul)" to the HTML document and then add some javascript code 
+//    that adds new "list items (li)" for each hour, showing the time, temperature and wind in each list item.
+//    To get the hours and minutes, use .getHours() and .getMinutes() on the Date object in the oneHourData class.
+//    Hint: https://pastebin.com/YFW3FQgW
+// 3. Notice that the hours are ugly (4:0 instead of 04:00). Create a function that takes the ugly hour (number)
+//    and returns a pretty string "04", instead of "4".  Hint: https://stackoverflow.com/a/18229123
+
+// Extra task: In the temperature list show:
+//             ☃️ if temperature is less than 10, 
+//             ⛅ if temperature is between 10-18, 
+//             ☀️ if temperature is between 18-22, 
+//             🥵 if temperature is above 22
+
+
+
 document.getElementById("butt1").onclick = function () { getWeather() };
 
 
