@@ -25,9 +25,9 @@ async function getWeather() {
   for (let i = 0; i < 23; i++) {
 
     let normDate = new Date(data["hourly"]["time"][i]) //turn weird date into uniform simple date
-    let oneHourData = new oneHourData(normDate, data["hourly"]["temperature_2m"][i], data["hourly"]["windspeed_10m"][i] //salikt stundai klat atbilstosos datus
+    let thisHourObj = new oneHourData(normDate, data["hourly"]["temperature_2m"][i], data["hourly"]["windspeed_10m"][i]) //salikt stundai klat atbilstosos datus
 
-    oneHourArr.push(oneHourData)
+    oneHourArr.push(thisHourObj)
 
   }
   console.log(oneHourArr)
