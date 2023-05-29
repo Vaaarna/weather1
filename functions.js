@@ -13,6 +13,21 @@ function checkTime(i) { //make time 4:0 into 04:00
   }
   return i;
 }
+function addEmogis(i) { //what name says
+  if (i < 10) {
+    i = "☃️" + i
+  }
+  else if (i < 18) {
+    i = "⛅" + i
+  }
+  else if (i < 22) {
+    i = "☀️" + i
+  }
+  else {
+    i = "🥵" + i
+  }
+  return i
+}
 
 async function getWeather() {
   // dabut datus no magic interneta DONT TOUCH
@@ -30,46 +45,40 @@ async function getWeather() {
   const oneHourArr = []
 
   for (let i = 0; i < data["hourly"]["time"].length; i++) {
-
     
-     //turn weird date into uniform simple date
-    let thisHourObj = new oneHourData(
-      new Date(data["hourly"]["time"][i]),
+    let thisHourObj = new oneHourData( //salikt stundai klat atbilstosos datus
+      new Date(data["hourly"]["time"][i]), //turn weird date into uniform simple date
       data["hourly"]["temperature_2m"][i],
       data["hourly"]["windspeed_10m"][i]
-      ) //salikt stundai klat atbilstosos datus
-
+    ) 
     oneHourArr.push(thisHourObj)
-
+    
   }
   console.log(oneHourArr)
 
   let list = document.getElementById("weatherOutputList");
 
-  oneHourArr.forEach((item) => { //iterates trough each item puts on a list in the frontend allegedly
+  // oneHourArr.forEach((item) =>
+  for(i = 0; i < oneHourArr.length; i++) { //iterates trough each item puts on a list in the frontend allegedly
+    let item = oneHourArr[i] 
+    if (item.time < Date.now()) {
+       continue    
+    }
+    
     let li = document.createElement("li");
 
     let outH = checkTime(item.time.getHours());
     let outMin = checkTime(item.time.getMinutes());
     let outTemp = Math.round(item.temperature);
     let outWimd = Math.round(item.wind);
-    if (outTemp < 10) {
-      outTemp = "☃️" + outTemp
-    }
-    else if (outTemp < 18) {
-      outTemp = "⛅" + outTemp
-    }
-    else if (outTemp < 22) {
-      outTemp = "☀️" + outTemp
-    }
-    else {
-      outTemp = "🥵" + outTemp
-    }
 
+    outTemp = addEmogis(outTemp)
+
+     
     li.innerText = `${outH}: ${outMin} temp: ${outTemp}°C wimd: ${outWimd} km/h`;
 
     list.appendChild(li);
-  });
+  };
 
 };
 
