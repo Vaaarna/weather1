@@ -75,7 +75,12 @@ async function getWeather() {
 
 
 // Tasks1: DONE!!!
-
+// Tasks2:
+// 1. Show only upcoming weather, do not show history.
+// 2. Separate days by adding a list item that is "⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯"
+// 3. Add additional parameter to the API request (url) to retrieve the wind direction.
+// 4. Display an arrow ( 🡠 🡢 🡡 🡣 🡤 🡥 🡦 🡧) that best represents the wind direction.
+// 5. If the wind speed is below 5km/h, do not display the arrow.
 
 
 document.getElementById("butt1").onclick = function () { getWeather() };
