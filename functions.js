@@ -11,12 +11,12 @@ class oneHourData {
     this.winddirection_10m = winddirection_10m
   }
 
-  isGoodForBike() { //checks if weather is good for bikig. later add items to remmeber if sunny if rainy if cold
-    if (this.temperature < 15) {
-      return false
-    }
-    return true;
-  }
+  // isGoodForBike() { //checks if weather is good for bikig. later add items to remmeber if sunny if rainy if cold
+  //   if (this.temperature < 15) {
+  //     return false
+  //   }
+  //   return true;
+  // }
 }
 function checkTime(i) { //make time 4:0 into 04:00
   if (i < 10) {
@@ -102,6 +102,29 @@ function explainWeatherCodes(i) {
   return i
 }
 
+function windDirArrows(i) {
+  if (i <= 23) {
+    i = "Z 🡡"
+  } else if (i <= 68) {
+    i = "ZA 🡥"
+  } else if (i <= 113) {
+    i = "A 🡢"
+  } else if (i <= 158) {
+    i = "DA 🡦"
+  } else if (i <= 203) {
+    i = "D 🡣"
+  } else if (i <= 248) {
+    i = "DR 🡧"
+  } else if (i <= 293) {
+    i = "R 🡠"
+  } else if (i <= 338) {
+    i = "ZR 🡤 "
+  } else if (i < 360) {
+    i = "Z 🡡"
+  }
+  return i
+}
+//     
 
 
 async function getWeather() {
@@ -155,22 +178,21 @@ async function getWeather() {
     let realFeel = Math.round(item.apparent_temperature);
     let precipitationProb = item.precipitation_probability;
     let vibes = explainWeatherCodes(item.weathercode); // add icons coressponding emogs
-    let windDir = item.winddirection_10m;
+    let windDir = windDirArrows(item.winddirection_10m);
 
     // outTemp = addEmogis(outTemp)
 
     let list = document.getElementById("weatherOutputList");
 
     let li = document.createElement("li");
-    li.innerText = `${outH}: ${outMin}, temp: ${outTemp}°C, (feels like: ${realFeel}), ${vibes}, prec.prob: ${precipitationProb}, wimd: ${outWimdSp}, km/h dir: ${windDir}`;
-    if (item.isGoodForBike()) {
-      li.innerText = li.innerText + "🚲"
-    }
-    // console.log(typeof(outH))
-    // console.log(outH)
+    li.innerText = `${outH}:${outMin}    temp: ${outTemp}°C (feels like: ${realFeel}°C), ${vibes}, prec.prob: ${precipitationProb}%, wimd: ${outWimdSp}km/h ${windDir}`;
+    // if (item.isGoodForBike()) {
+    //   li.innerText = li.innerText + "🚲"
+    // }
     if (item.time.getHours() == 0) {
       let seperator = document.createElement("li");
-      seperator.innerText = "⁺˚*•̩̩͙✩•̩̩͙* ˚ ⁺‧͙ · 。ﾟ☆: *.☽ .* :☆ﾟ. ⁺ ˚ *•̩̩͙✩•̩̩͙*˚⁺‧"
+      seperator.innerText = "⁺˚*•̩̩͙✩•̩̩͙* ˚ ⁺‧͙ · 。ﾟ☆: *.☽ .* :☆ﾟ. ⁺ ˚ *•̩̩͙✩•̩̩͙*˚⁺"
+
       list.appendChild(seperator);
     }
 
@@ -182,8 +204,7 @@ async function getWeather() {
 
 // Tasks1: DONE!!!
 // Tasks2.1: DONE!!!!
-// Tasks2.2
-// 4. Display an arrow ( 🡠 🡢 🡡 🡣 🡤 🡥 🡦 🡧) that best represents the wind direction.
+// Tasks2.2: DOEN!
 // 5. If the wind speed is below 5km/h, do not display the arrow.
 
 
