@@ -104,23 +104,23 @@ function explainWeatherCodes(i) {
 
 function windDirArrows(i) {
   if (i <= 23) {
-    i = "Z 🡡"
+    i = "Z 🡣"
   } else if (i <= 68) {
-    i = "ZA 🡥"
+    i = "ZA 🡧"
   } else if (i <= 113) {
-    i = "A 🡢"
+    i = "A  🡠"
   } else if (i <= 158) {
-    i = "DA 🡦"
+    i = "DA 🡤 "
   } else if (i <= 203) {
-    i = "D 🡣"
+    i = "D  🡡"
   } else if (i <= 248) {
-    i = "DR 🡧"
+    i = "DR 🡥"
   } else if (i <= 293) {
-    i = "R 🡠"
+    i = "R 🡢"
   } else if (i <= 338) {
-    i = "ZR 🡤 "
+    i = "ZR 🡦"
   } else if (i < 360) {
-    i = "Z 🡡"
+    i = "Z 🡣"
   }
   return i
 }
@@ -205,7 +205,7 @@ async function getWeather() {
 // Tasks1: DONE!!!
 // Tasks2.1: DONE!!!!
 // Tasks2.2: DOEN!
-// 5. If the wind speed is below 5km/h, do not display the arrow.
+
 
 
 document.getElementById("butt1").onclick = function () { getWeather() };
