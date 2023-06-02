@@ -1,17 +1,42 @@
-
-/* html{
+html {
     background-image: url("field1.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
-} */ 
-p{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 17px;
-    text-decoration: solid rgb(51, 50, 8);
 }
 
+p {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    /* font-size: 17px; */
+    /* text-decoration: solid rgb(51, 50, 8); */
+}
+
+.konteiners {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: forestgreen;
+    border-radius: 15px;
+    max-width:fit-content;
+    max-height: fit-content;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    column-gap: 5px;
+    padding: 7px; 
+    border: 1px solid red;
+}
+
+.big {
+    font-size: larger;
+    text-align: center;
+    border: 1px solid blue;
+}
+
+.small {
+    font-size: small;
+    text-align: center;
+    border: 1px solid purple;
+    grid-column: 1 / span 3;
 
 
 
+}
