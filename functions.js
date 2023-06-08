@@ -102,6 +102,69 @@ function explainWeatherCodes(i) {
   return i
 }
 
+function weatherEmog(i) {
+  if (i == 0) {
+    i = "🌞"
+  } else if (i == 1) {
+    i = "🌤"
+  } else if (i == 2) {
+    i = "🌥"
+  } else if (i == 3) {
+    i = "☁"
+  } else if (i == 45) {
+    i = "🌫"
+  } else if (i == 48) {
+    i = "depositing rime fog"
+  } else if (i == 51) {
+    i = "🌧"
+  } else if (i == 53) {
+    i = "🌧"
+  } else if (i == 55) {
+    i = "🌧"
+  } else if (i == 56) {
+    i = "light 	Freezing Drizzle"
+  } else if (i == 57) {
+    i = "dense  	Freezing Drizzle"
+  } else if (i == 61) {
+    i = "slight rain"
+  } else if (i == 63) {
+    i = "moderate rain"
+  } else if (i == 65) {
+    i = "heavy  rain"
+  } else if (i == 66) {
+    i = " Light Freezing Rain"
+  } else if (i == 67) {
+    i = "heavy intensity  	Freezing Rain"
+  } else if (i == 71) {
+    i = "Snow fall: Slight"
+  } else if (i == 73) {
+    i = "moderate Snow fall "
+  } else if (i == 75) {
+    i = "heavy intensity Snow fall"
+  } else if (i == 77) {
+    i = "Snow grains"
+  } else if (i == 80) {
+    i = " 	Rain showers: Slight"
+  } else if (i == 81) {
+    i = "moderate Rain showers"
+  } else if (i == 82) {
+    i = "violent Rain showers"
+  } else if (i == 85) {
+    i = "Snow showers slight"
+  } else if (i == 86) {
+    i = "heavy Snow showers"
+  } else if (i == 95) {
+    i = "Thunderstorm: Slight or moderate"
+  } else if (i == 96) {
+    i = "Thunderstorm with slight hail"
+  } else if (i == 99) {
+    i = "Thunderstorm with heavy hail"
+  } else {
+    i = "fuckif i know, die"
+  }
+  return i
+}
+
 function windDirArrows(i) {
   if (i <= 23) {
     i = "Z 🡣"
@@ -177,10 +240,10 @@ async function getWeather() {
     let outWimdSp = Math.round(item.wimdsp);
     let realFeel = Math.round(item.apparent_temperature);
     let precipitationProb = item.precipitation_probability;
-    let vibes = explainWeatherCodes(item.weathercode); // add icons coressponding emogs
+    let vibes = weatherEmog(item.weathercode) ; // add icons coressponding emogs
     let windDir = windDirArrows(item.winddirection_10m);
 
-
+    // explainWeatherCodes(item.weathercode)
     let list = document.getElementById("weatherOutputList");
 
     let li = document.createElement("li");
@@ -193,7 +256,7 @@ async function getWeather() {
 
     var elemDiv2 = document.createElement('div');
     elemDiv2.className = 'big';
-    elemDiv2.innerHTML = `☀️ ${outTemp}` + '°C';
+    elemDiv2.innerHTML = `${vibes} ${outTemp}` + '°C';
     li.appendChild(elemDiv2);
 
     var elemDiv3 = document.createElement('div');
