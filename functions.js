@@ -180,20 +180,46 @@ async function getWeather() {
     let vibes = explainWeatherCodes(item.weathercode); // add icons coressponding emogs
     let windDir = windDirArrows(item.winddirection_10m);
 
-    // outTemp = addEmogis(outTemp)
 
     let list = document.getElementById("weatherOutputList");
 
     let li = document.createElement("li");
-    li.innerText = `${outH}:${outMin}    temp: ${outTemp}°C (feels like: ${realFeel}°C), ${vibes}, prec.prob: ${precipitationProb}%, wimd: ${outWimdSp}km/h ${windDir}`;
-    // if (item.isGoodForBike()) {
-    //   li.innerText = li.innerText + "🚲"
-    // }
-    if (item.time.getHours() == 0) {
-      let seperator = document.createElement("li");
-      seperator.innerText = "⁺˚*•̩̩͙✩•̩̩͙* ˚ ⁺‧͙ · 。ﾟ☆: *.☽ .* :☆ﾟ. ⁺ ˚ *•̩̩͙✩•̩̩͙*˚⁺"
+    li.className = 'konteiners';
 
-      list.appendChild(seperator);
+    var elemDiv = document.createElement('div');
+    elemDiv.className = 'big';
+    elemDiv.innerHTML = `${outH}:${outMin}`;
+    li.appendChild(elemDiv);
+
+    var elemDiv2 = document.createElement('div');
+    elemDiv2.className = 'big';
+    elemDiv2.innerHTML = `☀️ ${outTemp}` + '°C';
+    li.appendChild(elemDiv2);
+
+    var elemDiv3 = document.createElement('div');
+    elemDiv3.className = 'big';
+    elemDiv3.innerHTML = `${outWimdSp}ₖₘₕ ${windDir}`;
+    li.appendChild(elemDiv3);
+
+    var elemDiv4 = document.createElement('div');
+    elemDiv4.className = 'small';
+    elemDiv4.innerHTML = `${realFeel}°C ${precipitationProb}%`;
+    li.appendChild(elemDiv4);
+
+    // li.innerText = `${outH}:${outMin}    temp: ${outTemp}°C (feels like: ${realFeel}°C), ${vibes}, prec.prob: ${precipitationProb}%, wimd: ${outWimdSp}km/h ${windDir}`;
+
+
+    if (item.time.getHours() == 0) {
+      var dividerItem = document.createElement("li");
+      var divDivi = document.createElement('div');
+      divDivi.className = 'konteiners big';
+      divDivi.innerHTML = "⁺˚*•̩̩͙✩•̩̩͙* ˚ ⁺‧͙ · 。ﾟ☆: *.☽ .* :☆ﾟ. ⁺ ˚ *•̩̩͙✩•̩̩͙*˚⁺";
+      dividerItem.appendChild(divDivi);
+      list.appendChild(dividerItem);
+    //   let seperator = 
+    //   seperator.innerText = "⁺˚*•̩̩͙✩•̩̩͙* ˚ ⁺‧͙ · 。ﾟ☆: *.☽ .* :☆ﾟ. ⁺ ˚ *•̩̩͙✩•̩̩͙*˚⁺"
+
+    //   list.appendChild(seperator);
     }
 
     list.appendChild(li);
@@ -205,23 +231,8 @@ async function getWeather() {
 // Tasks1: DONE!!!
 // Tasks2.1: DONE!!!!
 // Tasks2.2: DOEN!
-// Tasks3: 
-// 3. Add javascript code, where the list items are created, for each list item:
-// We want to add the html that we have created:
-      // <div class="big">21:00 </div>
-      // <div class="big">sun? 13C </div>
-      // <div class="big">wind dir 🡦</div>
-      // <div class="small ">feelslike 10, precip %</div>
-
-// To do this we have to:
-// Add a div to the list item. https://stackoverflow.com/a/15743136
-// Use vanilla javascript, not jQuery or other libraries.
-// Do not add css properties in javascript as in the example, but assign a class name (konteiners) to the div:
-//  https://stackoverflow.com/questions/1115310/how-can-i-add-a-class-to-a-dom-element-in-javascript
-//  This way it will by styled according to our css file.
-
-// Do this for each of the four divs
-
+// Tasks3: easiest shitttt!!! booom done!! sleepy now
+// 
 
 
 document.getElementById("butt1").onclick = function () { getWeather() };
