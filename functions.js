@@ -205,6 +205,22 @@ async function getWeather() {
 // Tasks1: DONE!!!
 // Tasks2.1: DONE!!!!
 // Tasks2.2: DOEN!
+// Tasks3: 
+// 3. Add javascript code, where the list items are created, for each list item:
+// We want to add the html that we have created:
+      // <div class="big">21:00 </div>
+      // <div class="big">sun? 13C </div>
+      // <div class="big">wind dir 🡦</div>
+      // <div class="small ">feelslike 10, precip %</div>
+
+// To do this we have to:
+// Add a div to the list item. https://stackoverflow.com/a/15743136
+// Use vanilla javascript, not jQuery or other libraries.
+// Do not add css properties in javascript as in the example, but assign a class name (konteiners) to the div:
+//  https://stackoverflow.com/questions/1115310/how-can-i-add-a-class-to-a-dom-element-in-javascript
+//  This way it will by styled according to our css file.
+
+// Do this for each of the four divs
 
 
 
