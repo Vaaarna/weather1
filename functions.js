@@ -59,9 +59,9 @@ function explainWeatherCodes(i) {
   } else if (i == 55) {
     i = "dense Drizzle"
   } else if (i == 56) {
-    i = "light 	Freezing Drizzle"
+    i = "light Freezing Drizzle"
   } else if (i == 57) {
-    i = "dense  	Freezing Drizzle"
+    i = "dense Freezing Drizzle"
   } else if (i == 61) {
     i = "slight rain"
   } else if (i == 63) {
@@ -91,7 +91,7 @@ function explainWeatherCodes(i) {
   } else if (i == 86) {
     i = "heavy Snow showers"
   } else if (i == 95) {
-    i = "Thunderstorm: Slight or moderate"
+    i = "Thunderstorm"
   } else if (i == 96) {
     i = "Thunderstorm with slight hail"
   } else if (i == 99) {
@@ -102,9 +102,62 @@ function explainWeatherCodes(i) {
   return i
 }
 
+function addPic(src, width, height, alt) {
+  var img = document.createElement("img");
+    img.src = src;
+    img.width = width;
+    img.height = height;
+    img.alt = alt;
+    return img;
+} 
+// sis (bultina uz augsu) i dont know neko... laikam
+// Yeeees!!!
+// un viss?
+// now it says
+// [object HTMLImageElement] 
+// ne ahh
+  
+
+// Jā, jo mēs to img elmentu ieliekam iekšā stringā. yesss. Tā pat kā ar:
+
+// var elemDiv3 = document.createElement('div');
+// ...
+// li.appendChild(elemDiv3);
+
+
+// ye, vajag vinu uz htmlu aizsutit?
+// hehehehhehe
+// kaa tos div-us
+// Mums vajag to img objektu appendot tam list itemam. Tā pat kā mēs tos četrus divus jau appendojam. jā
+// tas bus nesaistits elements ar tiem div?
+// okei meginam
+// 
+  //  pweeese i need assistance wwwwwweeeeeeeeee hii :******************
+  //  omg i got so excited forgot where the kissy button was lmao
+  //  awwqwaaaw
+  //  silly 🪿
+  //  yea 
+  //  kas tas?
+  //  jautajumazime goose
+   
+   //nu ja nee es nevaru spiest enter haha 
+   // Kāda ir problēma?
+   
+
+
+// ludzu latviski tikai
+// NO ACCENTS ALLOWED
+// es meginu pielikt bildites attiecigajam weather code, bet kaut kas neiet saka undefined
+// Vari iekopēt to error message? Es nevaru lokāli palaist majaslapu
+// man nav eerorora 
+// bildes vietaa ir UNDEFINED.tolowercase   ok
+// fails ir,
+// tas nav saistits ar to builder funkciju? <---
+
+// Returns HTML "img" object
 function weatherEmog(i) {
   if (i == 0) {
-    i = "🌞"
+    i = addPic("finIcons/sun.png", 50, 50, 'picDiscr') 
   } else if (i == 1) {
     i = "🌤"
   } else if (i == 2) {
@@ -232,31 +285,55 @@ async function getWeather() {
       continue
     }
 
-
-
     let outH = checkTime(item.time.getHours());
     let outMin = checkTime(item.time.getMinutes());
     let outTemp = Math.round(item.temperature);
     let outWimdSp = Math.round(item.wimdsp);
     let realFeel = Math.round(item.apparent_temperature);
     let precipitationProb = item.precipitation_probability;
-    let vibes = weatherEmog(item.weathercode) ; // add icons coressponding emogs
     let windDir = windDirArrows(item.winddirection_10m);
+  
+    
+    // let picDiscr = explainWeatherCodes(item.weathercode);
+    // imconfused:(
+      let list = document.getElementById("weatherOutputList");
+      
+      let li = document.createElement("li");
+      li.className = 'konteiners';
+      
+      var elemDiv = document.createElement('div');
+      elemDiv.className = 'big';
+      elemDiv.innerHTML = `${outH}:${outMin}`;
+      li.appendChild(elemDiv);
+      
+      
+      // Šis "weather_image" tagad vairs nebūs emoji (strings), bet HTML img objekts. Un šo img mums vajag appendot list itemam (li)
+      let weather_image = weatherEmog(item.weathercode);
+      
+      console.log(`weather_image type: ${typeof(weather_image)}`) // kads ir vina tips? its object string object string
+      if (typeof(weather_image) != String) {
+        // Add element only if it is an image. vai sis strada? tagad neraada neko
+        weather_image.className = 'big'; // For alignment and stuff
+        li.appendChild(weather_image); //  kas tagad notiek 
+      }
 
-    // explainWeatherCodes(item.weathercode)
-    let list = document.getElementById("weatherOutputList");
-
-    let li = document.createElement("li");
-    li.className = 'konteiners';
-
-    var elemDiv = document.createElement('div');
-    elemDiv.className = 'big';
-    elemDiv.innerHTML = `${outH}:${outMin}`;
-    li.appendChild(elemDiv);
+// Varētu būt ka tas notiek tā'dēļ ka funkcija weatherEmog var atgriezt gan img objektu, gan stringu (emoji). 
+// makes sense vajag visus nomainit...
+// STRAAADA tho! there is SUN!
+// raada bilditi!!! :)))))
+// TypeError: Node.appendChild: Argument 1 is not an object. still erroror tho
+  // Uncaught (in promise) TypeError: Node.appendChild: Argument 1 is not an object.
+  //     getWeather file:///C:/Users/Rasa/Documents/hakingcodingboombaam/weather1/functions.js:313
+  //     async* file:///C:/Users/Rasa/Documents/hakingcodingboombaam/weather1/functions.js:362
+  //     EventHandlerNonNull* file:///C:/Users/Rasa/Documents/hakingcodingboombaam/weather1/functions.js:362
+  // functions.js:313:10
+      
+      // we get image and put it in the list
 
     var elemDiv2 = document.createElement('div');
     elemDiv2.className = 'big';
-    elemDiv2.innerHTML = `${vibes} ${outTemp}` + '°C';
+    elemDiv2.innerHTML = `${outTemp}` + '°C';
+    // elemDiv2.innerHTML = '<img width="50" height="50" src="finIcons/.png">';
     li.appendChild(elemDiv2);
 
     var elemDiv3 = document.createElement('div');
@@ -269,7 +346,7 @@ async function getWeather() {
     elemDiv4.innerHTML = `${realFeel}°C ${precipitationProb}%`;
     li.appendChild(elemDiv4);
 
-    // li.innerText = `${outH}:${outMin}    temp: ${outTemp}°C (feels like: ${realFeel}°C), ${vibes}, prec.prob: ${precipitationProb}%, wimd: ${outWimdSp}km/h ${windDir}`;
+    // li.innerText = `${outH}:${outMin}    temp: ${outTemp}°C (feels like: ${realFeel}°C), ${}, prec.prob: ${precipitationProb}%, wimd: ${outWimdSp}km/h ${windDir}`;
 
 
     if (item.time.getHours() == 0) {
