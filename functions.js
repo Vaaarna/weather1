@@ -39,183 +39,78 @@ function addEmogis(i) { //what name says
   }
   return i
 }
-function explainWeatherCodes(i) {
-  if (i == 0) {
-    i = "Clear sky"
-  } else if (i == 1) {
-    i = "mainly clear "
-  } else if (i == 2) {
-    i = "partly cloudy"
-  } else if (i == 3) {
-    i = "overcast"
-  } else if (i == 45) {
-    i = "fog"
-  } else if (i == 48) {
-    i = "depositing rime fog"
-  } else if (i == 51) {
-    i = "light Drizzle"
-  } else if (i == 53) {
-    i = "moderate Drizzle"
-  } else if (i == 55) {
-    i = "dense Drizzle"
-  } else if (i == 56) {
-    i = "light Freezing Drizzle"
-  } else if (i == 57) {
-    i = "dense Freezing Drizzle"
-  } else if (i == 61) {
-    i = "slight rain"
-  } else if (i == 63) {
-    i = "moderate rain"
-  } else if (i == 65) {
-    i = "heavy  rain"
-  } else if (i == 66) {
-    i = " Light Freezing Rain"
-  } else if (i == 67) {
-    i = "heavy intensity  	Freezing Rain"
-  } else if (i == 71) {
-    i = "Snow fall: Slight"
-  } else if (i == 73) {
-    i = "moderate Snow fall "
-  } else if (i == 75) {
-    i = "heavy intensity Snow fall"
-  } else if (i == 77) {
-    i = "Snow grains"
-  } else if (i == 80) {
-    i = " 	Rain showers: Slight"
-  } else if (i == 81) {
-    i = "moderate Rain showers"
-  } else if (i == 82) {
-    i = "violent Rain showers"
-  } else if (i == 85) {
-    i = "Snow showers slight"
-  } else if (i == 86) {
-    i = "heavy Snow showers"
-  } else if (i == 95) {
-    i = "Thunderstorm"
-  } else if (i == 96) {
-    i = "Thunderstorm with slight hail"
-  } else if (i == 99) {
-    i = "Thunderstorm with heavy hail"
-  } else {
-    i = "fuckif i know, die"
-  }
-  return i
-}
 
-function addPic(src, width, height, alt) {
+
+function getHtmlPic(src, width, title) {
   var img = document.createElement("img");
-    img.src = src;
-    img.width = width;
-    img.height = height;
-    img.alt = alt;
-    return img;
-} 
-// sis (bultina uz augsu) i dont know neko... laikam
-// Yeeees!!!
-// un viss?
-// now it says
-// [object HTMLImageElement] 
-// ne ahh
-  
+  img.src = src;
+  img.width = width;
+  // img.height = height;
+  img.title = title;
+  return img;
+}
+function getWeatherImg(weatherCode) {
 
-// Jā, jo mēs to img elmentu ieliekam iekšā stringā. yesss. Tā pat kā ar:
-
-// var elemDiv3 = document.createElement('div');
-// ...
-// li.appendChild(elemDiv3);
-
-
-// ye, vajag vinu uz htmlu aizsutit?
-// hehehehhehe
-// kaa tos div-us
-// Mums vajag to img objektu appendot tam list itemam. Tā pat kā mēs tos četrus divus jau appendojam. jā
-// tas bus nesaistits elements ar tiem div?
-// okei meginam
-// 
-  //  pweeese i need assistance wwwwwweeeeeeeeee hii :******************
-  //  omg i got so excited forgot where the kissy button was lmao
-  //  awwqwaaaw
-  //  silly 🪿
-  //  yea 
-  //  kas tas?
-  //  jautajumazime goose
-   
-   //nu ja nee es nevaru spiest enter haha 
-   // Kāda ir problēma?
-   
-
-
-// ludzu latviski tikai
-// NO ACCENTS ALLOWED
-// es meginu pielikt bildites attiecigajam weather code, bet kaut kas neiet saka undefined
-// Vari iekopēt to error message? Es nevaru lokāli palaist majaslapu
-// man nav eerorora 
-// bildes vietaa ir UNDEFINED.tolowercase   ok
-// fails ir,
-// tas nav saistits ar to builder funkciju? <---
-
-// Returns HTML "img" object
-function weatherEmog(i) {
-  if (i == 0) {
-    i = addPic("finIcons/sun.png", 50, 50, 'picDiscr') 
-  } else if (i == 1) {
-    i = "🌤"
-  } else if (i == 2) {
-    i = "🌥"
-  } else if (i == 3) {
-    i = "☁"
-  } else if (i == 45) {
-    i = "🌫"
-  } else if (i == 48) {
-    i = "depositing rime fog"
-  } else if (i == 51) {
-    i = "🌧"
-  } else if (i == 53) {
-    i = "🌧"
-  } else if (i == 55) {
-    i = "🌧"
-  } else if (i == 56) {
-    i = "light 	Freezing Drizzle"
-  } else if (i == 57) {
-    i = "dense  	Freezing Drizzle"
-  } else if (i == 61) {
-    i = "slight rain"
-  } else if (i == 63) {
-    i = "moderate rain"
-  } else if (i == 65) {
-    i = "heavy  rain"
-  } else if (i == 66) {
-    i = " Light Freezing Rain"
-  } else if (i == 67) {
-    i = "heavy intensity  	Freezing Rain"
-  } else if (i == 71) {
-    i = "Snow fall: Slight"
-  } else if (i == 73) {
-    i = "moderate Snow fall "
-  } else if (i == 75) {
-    i = "heavy intensity Snow fall"
-  } else if (i == 77) {
-    i = "Snow grains"
-  } else if (i == 80) {
-    i = " 	Rain showers: Slight"
-  } else if (i == 81) {
-    i = "moderate Rain showers"
-  } else if (i == 82) {
-    i = "violent Rain showers"
-  } else if (i == 85) {
-    i = "Snow showers slight"
-  } else if (i == 86) {
-    i = "heavy Snow showers"
-  } else if (i == 95) {
-    i = "Thunderstorm: Slight or moderate"
-  } else if (i == 96) {
-    i = "Thunderstorm with slight hail"
-  } else if (i == 99) {
-    i = "Thunderstorm with heavy hail"
+  if (weatherCode == 0) {
+    return getHtmlPic("icons2/sun.png", 50,  "Clear sky")
+  } else if (weatherCode == 1) {
+    return getHtmlPic("icons2/sunpartlycloudy.png", 50,  "mainly clear ")
+  } else if (weatherCode == 2) {
+    return getHtmlPic("icons2/sunmostcloudy.png", 50, 50, "partly cloudy")
+  } else if (weatherCode == 3) {
+    return getHtmlPic("icons2/cloud.png", 50, 50, "overcast")
+  } else if (weatherCode == 45) {
+    return getHtmlPic("icons2/cloud.png", 50, 50, "fog")
+  } else if (weatherCode == 48) {
+    return getHtmlPic("icons2/cloud.png", 50, 50, "depositing rime fog")
+  } else if (weatherCode == 51) {
+    return getHtmlPic("icons2/raining.png", 50, 50, "light Drizzle")
+  } else if (weatherCode == 53) {
+    return getHtmlPic("icons2/raining.png", 50, 50, "moderate Drizzle")
+  } else if (weatherCode == 55) {
+    return getHtmlPic("icons2/raining.png", 50, 50, "dense Drizzle")
+  } else if (weatherCode == 56) {
+    return getHtmlPic("icons2/raining.png", 50, 50, "light Freezing Drizzle")
+  } else if (weatherCode == 57) {
+    return getHtmlPic("icons2/raining.png", 50, 50, "dense Freezing Drizzle")
+  } else if (weatherCode == 61) {
+    return getHtmlPic("icons2/stormrainnn.png", 50, 50, "slight rain")
+  } else if (weatherCode == 63) {
+    return getHtmlPic("icons2/stormrainnn.png", 50, 50, "moderate rain")
+  } else if (weatherCode == 65) {
+    return getHtmlPic("icons2/stormrainnn.png", 50, 50, "heavy  rain")
+  } else if (weatherCode == 66) {
+    return getHtmlPic("icons2/stormrainnn.png", 50, 50, " Light Freezing Rain")
+  } else if (weatherCode == 67) {
+    return getHtmlPic("icons2/stormrainnn.png", 50, 50, "heavy intensity Freezing Rain")
+  } else if (weatherCode == 71) {
+    return getHtmlPic("icons2/snow.png", 50, 50, "Snow fall: Slight")
+  } else if (weatherCode == 73) {
+    return getHtmlPic("icons2/snow.png", 50, 50, "moderate Snow fall ")
+  } else if (weatherCode == 75) {
+    return getHtmlPic("icons2/snow.png", 50, 50, "heavy intensity Snow fall")
+  } else if (weatherCode == 77) {
+    return getHtmlPic("icons2/snow.png", 50, 50, "Snow grains")
+  } else if (weatherCode == 80) {
+    return getHtmlPic("icons2/stormrainnn.png", 50, 50, "Rain showers: Slight")
+  } else if (weatherCode == 81) {
+    return getHtmlPic("icons2/stormrainnn.png", 50, 50, "moderate Rain showers")
+  } else if (weatherCode == 82) {
+    return getHtmlPic("icons2/stormrainnn.png", 50, 50, "violent Rain showers")
+  } else if (weatherCode == 85) {
+    return getHtmlPic("icons2/snow.png", 50, 50, "Snow showers slight")
+  } else if (weatherCode == 86) {
+    return getHtmlPic("icons2/snow.png", 50, 50, "heavy Snow showers")
+  } else if (weatherCode == 95) {
+    return getHtmlPic("icons2/storm.png", 50, 50, "Thunderstorm")
+  } else if (weatherCode == 96) {
+    return getHtmlPic("icons2/stormangy.png", 50, 50, "Thunderstorm with slight hail")
+  } else if (weatherCode == 99) {
+    return getHtmlPic("icons2/stormangy.png", 50, 50, "Thunderstorm with heavy hail")
   } else {
-    i = "fuckif i know, die"
+    return null
   }
-  return i
+
 }
 
 function windDirArrows(i) {
@@ -235,13 +130,11 @@ function windDirArrows(i) {
     i = "R 🡢"
   } else if (i <= 338) {
     i = "ZR 🡦"
-  } else if (i < 360) {
+  } else if (i <= 360) {
     i = "Z 🡣"
   }
   return i
-}
-//     
-
+}   
 
 async function getWeather() {
   // dabut datus no magic interneta DONT TOUCH
@@ -278,7 +171,7 @@ async function getWeather() {
 
 
 
-  // oneHourArr.forEach((item) =>
+
   for (i = 0; i < oneHourArr.length; i++) { //iterates trough each item puts on a list in the frontend allegedly
     let item = oneHourArr[i]
     if (item.time < Date.now()) {
@@ -292,43 +185,25 @@ async function getWeather() {
     let realFeel = Math.round(item.apparent_temperature);
     let precipitationProb = item.precipitation_probability;
     let windDir = windDirArrows(item.winddirection_10m);
-  
-    
-    // let picDiscr = explainWeatherCodes(item.weathercode);
-    // imconfused:(
-      let list = document.getElementById("weatherOutputList");
-      
-      let li = document.createElement("li");
-      li.className = 'konteiners';
-      
-      var elemDiv = document.createElement('div');
-      elemDiv.className = 'big';
-      elemDiv.innerHTML = `${outH}:${outMin}`;
-      li.appendChild(elemDiv);
-      
-      
-      // Šis "weather_image" tagad vairs nebūs emoji (strings), bet HTML img objekts. Un šo img mums vajag appendot list itemam (li)
-      let weather_image = weatherEmog(item.weathercode);
-      
-      console.log(`weather_image type: ${typeof(weather_image)}`) // kads ir vina tips? its object string object string
-      if (typeof(weather_image) != String) {
-        // Add element only if it is an image. vai sis strada? tagad neraada neko
-        weather_image.className = 'big'; // For alignment and stuff
-        li.appendChild(weather_image); //  kas tagad notiek 
-      }
 
-// Varētu būt ka tas notiek tā'dēļ ka funkcija weatherEmog var atgriezt gan img objektu, gan stringu (emoji). 
-// makes sense vajag visus nomainit...
-// STRAAADA tho! there is SUN!
-// raada bilditi!!! :)))))
-// TypeError: Node.appendChild: Argument 1 is not an object. still erroror tho
-  // Uncaught (in promise) TypeError: Node.appendChild: Argument 1 is not an object.
-  //     getWeather file:///C:/Users/Rasa/Documents/hakingcodingboombaam/weather1/functions.js:313
-  //     async* file:///C:/Users/Rasa/Documents/hakingcodingboombaam/weather1/functions.js:362
-  //     EventHandlerNonNull* file:///C:/Users/Rasa/Documents/hakingcodingboombaam/weather1/functions.js:362
-  // functions.js:313:10
-      
-      // we get image and put it in the list
+    // let picDiscr = explainWeatherCodes(item.weathercode);
+
+    let list = document.getElementById("weatherOutputList");
+
+    let li = document.createElement("li");
+    li.className = 'konteiners';
+
+    var elemDiv = document.createElement('div');
+    elemDiv.className = 'big';
+    elemDiv.innerHTML = `${outH}:${outMin}`;
+    li.appendChild(elemDiv);
+
+
+    let weather_image = getWeatherImg(item.weathercode);
+    if (typeof (weather_image) != null) {
+      weather_image.className = 'big';
+      li.appendChild(weather_image);
+    }
 
     var elemDiv2 = document.createElement('div');
     elemDiv2.className = 'big';
@@ -356,10 +231,10 @@ async function getWeather() {
       divDivi.innerHTML = "⁺˚*•̩̩͙✩•̩̩͙* ˚ ⁺‧͙ · 。ﾟ☆: *.☽ .* :☆ﾟ. ⁺ ˚ *•̩̩͙✩•̩̩͙*˚⁺";
       dividerItem.appendChild(divDivi);
       list.appendChild(dividerItem);
-    //   let seperator = 
-    //   seperator.innerText = "⁺˚*•̩̩͙✩•̩̩͙* ˚ ⁺‧͙ · 。ﾟ☆: *.☽ .* :☆ﾟ. ⁺ ˚ *•̩̩͙✩•̩̩͙*˚⁺"
+      //   let seperator = 
+      //   seperator.innerText = "⁺˚*•̩̩͙✩•̩̩͙* ˚ ⁺‧͙ · 。ﾟ☆: *.☽ .* :☆ﾟ. ⁺ ˚ *•̩̩͙✩•̩̩͙*˚⁺"
 
-    //   list.appendChild(seperator);
+      //   list.appendChild(seperator);
     }
 
     list.appendChild(li);
