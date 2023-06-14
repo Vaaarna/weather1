@@ -1,6 +1,6 @@
 
 class oneHourData {
-  constructor(time, temperature, wimdsp, apparent_temperature, precipitation_probability, weathercode, windspeed_10m, winddirection_10m) {
+  constructor(time, temperature, wimdsp, apparent_temperature, precipitation_probability, weathercode, windspeed_10m, winddirection_10m, is_day) {
     this.time = time;
     this.temperature = temperature;
     this.wimdsp = wimdsp;
@@ -8,7 +8,8 @@ class oneHourData {
     this.precipitation_probability = precipitation_probability;
     this.weathercode = weathercode;
     this.windspeed_10m = windspeed_10m;
-    this.winddirection_10m = winddirection_10m
+    this.winddirection_10m = winddirection_10m;
+    this.is_day = is_day
   }
 
   // isGoodForBike() { //checks if weather is good for bikig. later add items to remmeber if sunny if rainy if cold
@@ -24,21 +25,21 @@ function checkTime(i) { //make time 4:0 into 04:00
   }
   return i;
 }
-function addEmogis(i) { //what name says
-  if (i < 10) {
-    i = "☃️" + i
-  }
-  else if (i < 18) {
-    i = "⛅" + i
-  }
-  else if (i < 22) {
-    i = "☀️" + i
-  }
-  else {
-    i = "🥵" + i
-  }
-  return i
-}
+// function addEmogis(i) { //what name says
+//   if (i < 10) {
+//     i = "☃️" + i
+//   }
+//   else if (i < 18) {
+//     i = "⛅" + i
+//   }
+//   else if (i < 22) {
+//     i = "☀️" + i
+//   }
+//   else {
+//     i = "🥵" + i
+//   }
+//   return i
+// }
 
 
 function getHtmlPic(src, width, title) {
@@ -52,65 +53,76 @@ function getHtmlPic(src, width, title) {
 function getWeatherImg(weatherCode) {
 
   if (weatherCode == 0) {
-    return getHtmlPic("icons2/sun.png", 50,  "Clear sky")
+    return getHtmlPic("icons2/sun.png", 50, "Clear sky")
   } else if (weatherCode == 1) {
-    return getHtmlPic("icons2/sunpartlycloudy.png", 50,  "mainly clear ")
+    return getHtmlPic("icons2/sunpartlycloudy.png", 50, "mainly clear ")
   } else if (weatherCode == 2) {
-    return getHtmlPic("icons2/sunmostcloudy.png", 50, 50, "partly cloudy")
+    return getHtmlPic("icons2/sunmostcloudy.png", 50, "partly cloudy")
   } else if (weatherCode == 3) {
-    return getHtmlPic("icons2/cloud.png", 50, 50, "overcast")
+    return getHtmlPic("icons2/cloud.png", 50, "overcast")
   } else if (weatherCode == 45) {
-    return getHtmlPic("icons2/cloud.png", 50, 50, "fog")
+    return getHtmlPic("icons2/cloud.png", 50, "fog")
   } else if (weatherCode == 48) {
-    return getHtmlPic("icons2/cloud.png", 50, 50, "depositing rime fog")
+    return getHtmlPic("icons2/cloud.png", 50, "depositing rime fog")
   } else if (weatherCode == 51) {
-    return getHtmlPic("icons2/raining.png", 50, 50, "light Drizzle")
+    return getHtmlPic("icons2/raining.png", 50, "light drizzle")
   } else if (weatherCode == 53) {
-    return getHtmlPic("icons2/raining.png", 50, 50, "moderate Drizzle")
+    return getHtmlPic("icons2/raining.png", 50, "moderate drizzle")
   } else if (weatherCode == 55) {
-    return getHtmlPic("icons2/raining.png", 50, 50, "dense Drizzle")
+    return getHtmlPic("icons2/raining.png", 50, "dense drizzle")
   } else if (weatherCode == 56) {
-    return getHtmlPic("icons2/raining.png", 50, 50, "light Freezing Drizzle")
+    return getHtmlPic("icons2/raining.png", 50, "light Freezing drizzle")
   } else if (weatherCode == 57) {
-    return getHtmlPic("icons2/raining.png", 50, 50, "dense Freezing Drizzle")
+    return getHtmlPic("icons2/raining.png", 50, "dense Freezing Drizzle")
   } else if (weatherCode == 61) {
-    return getHtmlPic("icons2/stormrainnn.png", 50, 50, "slight rain")
+    return getHtmlPic("icons2/stormrainnn.png", 50, "slight rain")
   } else if (weatherCode == 63) {
-    return getHtmlPic("icons2/stormrainnn.png", 50, 50, "moderate rain")
+    return getHtmlPic("icons2/stormrainnn.png", 50, "moderate rain")
   } else if (weatherCode == 65) {
-    return getHtmlPic("icons2/stormrainnn.png", 50, 50, "heavy  rain")
+    return getHtmlPic("icons2/stormrainnn.png", 50, "heavy  rain")
   } else if (weatherCode == 66) {
-    return getHtmlPic("icons2/stormrainnn.png", 50, 50, " Light Freezing Rain")
+    return getHtmlPic("icons2/stormrainnn.png", 50, " Light Freezing Rain")
   } else if (weatherCode == 67) {
-    return getHtmlPic("icons2/stormrainnn.png", 50, 50, "heavy intensity Freezing Rain")
+    return getHtmlPic("icons2/stormrainnn.png", 50, "heavy intensity Freezing Rain")
   } else if (weatherCode == 71) {
-    return getHtmlPic("icons2/snow.png", 50, 50, "Snow fall: Slight")
+    return getHtmlPic("icons2/snow.png", 50, "Snow fall: Slight")
   } else if (weatherCode == 73) {
-    return getHtmlPic("icons2/snow.png", 50, 50, "moderate Snow fall ")
+    return getHtmlPic("icons2/snow.png", 50, "moderate Snow fall ")
   } else if (weatherCode == 75) {
-    return getHtmlPic("icons2/snow.png", 50, 50, "heavy intensity Snow fall")
+    return getHtmlPic("icons2/snow.png", 50, "heavy intensity Snow fall")
   } else if (weatherCode == 77) {
-    return getHtmlPic("icons2/snow.png", 50, 50, "Snow grains")
+    return getHtmlPic("icons2/snow.png", 50, "Snow grains")
   } else if (weatherCode == 80) {
-    return getHtmlPic("icons2/stormrainnn.png", 50, 50, "Rain showers: Slight")
+    return getHtmlPic("icons2/stormrainnn.png", 50, "Rain showers: Slight")
   } else if (weatherCode == 81) {
-    return getHtmlPic("icons2/stormrainnn.png", 50, 50, "moderate Rain showers")
+    return getHtmlPic("icons2/stormrainnn.png", 50, "moderate Rain showers")
   } else if (weatherCode == 82) {
-    return getHtmlPic("icons2/stormrainnn.png", 50, 50, "violent Rain showers")
+    return getHtmlPic("icons2/stormrainnn.png", 50, "violent Rain showers")
   } else if (weatherCode == 85) {
-    return getHtmlPic("icons2/snow.png", 50, 50, "Snow showers slight")
+    return getHtmlPic("icons2/snow.png", 50, "Snow showers slight")
   } else if (weatherCode == 86) {
-    return getHtmlPic("icons2/snow.png", 50, 50, "heavy Snow showers")
+    return getHtmlPic("icons2/snow.png", 50, "heavy Snow showers")
   } else if (weatherCode == 95) {
-    return getHtmlPic("icons2/storm.png", 50, 50, "Thunderstorm")
+    return getHtmlPic("icons2/storm.png", 50, "Thunderstorm")
   } else if (weatherCode == 96) {
-    return getHtmlPic("icons2/stormangy.png", 50, 50, "Thunderstorm with slight hail")
+    return getHtmlPic("icons2/stormangy.png", 50, "Thunderstorm with slight hail")
   } else if (weatherCode == 99) {
-    return getHtmlPic("icons2/stormangy.png", 50, 50, "Thunderstorm with heavy hail")
+    return getHtmlPic("icons2/stormangy.png", 50, "Thunderstorm with heavy hail")
   } else {
     return null
   }
 
+}
+function getMooned(weatherCode) {
+  if (weatherCode == 0) {
+    return getHtmlPic("icons2/moonstars.png", 50, "clear")
+  } else if (weatherCode == 1) {
+    return getHtmlPic("icons2/moonpartlycloud.png", 50, "mainly clear")
+  } else if (weatherCode == 2) {
+    return getHtmlPic("icons2/moonmostloudy.png", 50, "partly cloudy")
+  } else {
+    return getWeatherImg(weatherCode);
+  }
 }
 
 function windDirArrows(i) {
@@ -134,7 +146,7 @@ function windDirArrows(i) {
     i = "Z 🡣"
   }
   return i
-}   
+}
 
 async function getWeather() {
   // dabut datus no magic interneta DONT TOUCH
@@ -143,8 +155,8 @@ async function getWeather() {
     return response.json();
   }
   // okai
-  const url = `https://api.open-meteo.com/v1/forecast?latitude=56.95&longitude=24.11&hourly=temperature_2m,apparent_temperature,precipitation_probability,weathercode,windspeed_10m,winddirection_10m&forecast_days=3`;
-
+  // const url = `https://api.open-meteo.com/v1/forecast?latitude=56.95&longitude=24.11&hourly=temperature_2m,apparent_temperature,precipitation_probability,weathercode,windspeed_10m,winddirection_10m&forecast_days=3`;
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=56.95&longitude=24.11&hourly=temperature_2m,apparent_temperature,precipitation_probability,weathercode,windspeed_10m,winddirection_10m,is_day&forecast_days=3`;
   const data = await getData(url);
 
   console.log({ data });
@@ -161,8 +173,8 @@ async function getWeather() {
       data["hourly"]["precipitation_probability"][i],
       data["hourly"]["weathercode"][i],
       data["hourly"]["windspeed_10m"][i],
-      data["hourly"]["winddirection_10m"][i]
-
+      data["hourly"]["winddirection_10m"][i],
+      data["hourly"]["is_day"][i]
     )
     oneHourArr.push(thisHourObj)
 
@@ -191,35 +203,54 @@ async function getWeather() {
     let list = document.getElementById("weatherOutputList");
 
     let li = document.createElement("li");
-    li.className = 'konteiners';
+    if (item.is_day == 1) {
+      li.className = 'konteinersDay';
+    } else if (item.is_day == 0) {
+      li.className = 'konteinersNight';
+    } else {
+      li.className = 'separator'
+    }
 
+    // STUNDAS
     var elemDiv = document.createElement('div');
     elemDiv.className = 'big';
-    elemDiv.innerHTML = `${outH}:${outMin}`;
+    elemDiv.innerHTML = `${outH}⁰⁰`;
     li.appendChild(elemDiv);
 
-
-    let weather_image = getWeatherImg(item.weathercode);
+    // ICONA
+    let weather_image
+    if (item.is_day == 0) {
+      weather_image = getMooned(item.weathercode);
+    } else {
+      weather_image = getWeatherImg(item.weathercode);
+    }
     if (typeof (weather_image) != null) {
       weather_image.className = 'big';
       li.appendChild(weather_image);
     }
-
+    // TEMP
     var elemDiv2 = document.createElement('div');
     elemDiv2.className = 'big';
     elemDiv2.innerHTML = `${outTemp}` + '°C';
-    // elemDiv2.innerHTML = '<img width="50" height="50" src="finIcons/.png">';
     li.appendChild(elemDiv2);
+
+    // SMAL
+    var elemDiv4 = document.createElement('div');
+    elemDiv4.className = 'small';
+    elemDiv4.innerHTML = `feels like: ${realFeel}°C <br>
+precipitation: ${precipitationProb}% <br>
+wind: ${outWimdSp}km/h  ${windDir}`;
+    // elemDiv4.innerHTML = ;ₖₘ
+    li.appendChild(elemDiv4);
+
+    // WINDdIR
+
 
     var elemDiv3 = document.createElement('div');
     elemDiv3.className = 'big';
-    elemDiv3.innerHTML = `${outWimdSp}ₖₘₕ ${windDir}`;
+    elemDiv3.innerHTML = `->`;
     li.appendChild(elemDiv3);
 
-    var elemDiv4 = document.createElement('div');
-    elemDiv4.className = 'small';
-    elemDiv4.innerHTML = `${realFeel}°C ${precipitationProb}%`;
-    li.appendChild(elemDiv4);
 
     // li.innerText = `${outH}:${outMin}    temp: ${outTemp}°C (feels like: ${realFeel}°C), ${}, prec.prob: ${precipitationProb}%, wimd: ${outWimdSp}km/h ${windDir}`;
 
@@ -227,7 +258,7 @@ async function getWeather() {
     if (item.time.getHours() == 0) {
       var dividerItem = document.createElement("li");
       var divDivi = document.createElement('div');
-      divDivi.className = 'konteiners big';
+      divDivi.className = 'separator big';
       divDivi.innerHTML = "⁺˚*•̩̩͙✩•̩̩͙* ˚ ⁺‧͙ · 。ﾟ☆: *.☽ .* :☆ﾟ. ⁺ ˚ *•̩̩͙✩•̩̩͙*˚⁺";
       dividerItem.appendChild(divDivi);
       list.appendChild(dividerItem);
