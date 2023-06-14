@@ -156,7 +156,9 @@ async function getWeather() {
   }
   // okai
   // const url = `https://api.open-meteo.com/v1/forecast?latitude=56.95&longitude=24.11&hourly=temperature_2m,apparent_temperature,precipitation_probability,weathercode,windspeed_10m,winddirection_10m&forecast_days=3`;
-  const url = `https://api.open-meteo.com/v1/forecast?latitude=56.95&longitude=24.11&hourly=temperature_2m,apparent_temperature,precipitation_probability,weathercode,windspeed_10m,winddirection_10m,is_day&forecast_days=3`;
+  
+  // https://api.open-meteo.com/v1/forecast?latitude=56.95&longitude=24.11&hourly=temperature_2m,apparent_temperature,precipitation_probability,weathercode,windspeed_10m,winddirection_10m,is_day&forecast_days=3&timezone=auto
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=56.95&longitude=24.11&hourly=temperature_2m,apparent_temperature,precipitation_probability,weathercode,windspeed_10m,winddirection_10m,is_day&forecast_days=3&timezone=auto`;
   const data = await getData(url);
 
   console.log({ data });
@@ -204,9 +206,9 @@ async function getWeather() {
 
     let li = document.createElement("li");
     if (item.is_day == 1) {
-      li.className = 'konteinersDay';
+      li.className = 'konteiners day';
     } else if (item.is_day == 0) {
-      li.className = 'konteinersNight';
+      li.className = 'konteiners night';
     } else {
       li.className = 'separator'
     }

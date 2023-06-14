@@ -12,33 +12,41 @@ p {
     /* text-decoration: solid rgb(51, 50, 8); */
 }
 
-.konteinersDay {
+.konteiners {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    background-color: rgb(126, 192, 197);
     border-radius: 15px;
     max-width:fit-content;
     max-height: fit-content;
-    display: grid;
-    grid-template-columns: auto auto auto auto auto;
+    display: flex;
+    align-items:center;
+    /* grid-template-columns: auto auto auto auto auto; */
     column-gap: 5px;
     padding: 7px; 
     margin: 5px;
     /* border: 1px solid red; */
 }
-.konteinersNight {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: aliceblue;
+.night {
     background-color: rgb(18, 38, 80);
+    color:aliceblue;
+
+}
+.day {
+
+    background-color: rgb(126, 192, 197);
+}
+/* .konteinersNight { */
+    /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: aliceblue;
     border-radius: 15px;
     max-width:fit-content;
     max-height: fit-content;
-    display: grid;
-    grid-template-columns: auto auto auto auto auto;
+    display: flex;
+    align-items:center;
     column-gap: 5px;
     padding: 7px; 
-    margin: 5px;
+    margin: 5px; */
     /* border: 1px solid red; */
-}
+/* } */
 .separator {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: aliceblue;
@@ -57,7 +65,7 @@ p {
 .big {
     font-size: larger;
     text-align: center;
-     border: 1px solid blue;
+     /* border: 1px solid blue; */
 }
 
 .small {
