@@ -13,7 +13,9 @@ p {
 }
 
 .konteiners {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Garamond', serif;
+    font-size: 200%;
+    font-weight: 500;
     border-radius: 15px;
     max-width:fit-content;
     max-height: fit-content;
@@ -34,19 +36,7 @@ p {
 
     background-color: rgb(126, 192, 197);
 }
-/* .konteinersNight { */
-    /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: aliceblue;
-    border-radius: 15px;
-    max-width:fit-content;
-    max-height: fit-content;
-    display: flex;
-    align-items:center;
-    column-gap: 5px;
-    padding: 7px; 
-    margin: 5px; */
-    /* border: 1px solid red; */
-/* } */
+
 .separator {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: aliceblue;
@@ -63,13 +53,13 @@ p {
 
 
 .big {
-    font-size: larger;
+    font-size: 100%;
     text-align: center;
      /* border: 1px solid blue; */
 }
 
 .small {
-    font-size: x-small;
+    font-size: 50%;
     text-align: left;
     /* grid-column: 1 / span 3; */
     /* border: 1px solid purple; */
