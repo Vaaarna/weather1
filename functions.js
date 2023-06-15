@@ -111,7 +111,6 @@ function getWeatherImg(weatherCode) {
   } else {
     return null
   }
-
 }
 function getMooned(weatherCode) {
   if (weatherCode == 0) {
@@ -282,5 +281,5 @@ wind: ${outWimdSp}km/h  ${windDir}`;
 // Tasks3: easiest shitttt!!! booom done!! sleepy now
 // 
 
-
-document.getElementById("butt1").onclick = function () { getWeather() };
+getWeather() 
+// document.getElementById("butt1").onclick = function () { getWeather() };
