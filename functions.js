@@ -65,9 +65,9 @@ function getWeatherImg(weatherCode, height) {
   } else if (weatherCode == 48) {
     return getHtmlPic("icons2/cloud.png", height, "depositing rime fog")
   } else if (weatherCode == 51) {
-    return getHtmlPic("icons2/raining.png", height, "light drizzle")
+    return getHtmlPic("icons2/drizzling.png", height, "light drizzle")
   } else if (weatherCode == 53) {
-    return getHtmlPic("icons2/raining.png", height, "moderate drizzle")
+    return getHtmlPic("icons2/drizzling.png", height, "moderate drizzle")
   } else if (weatherCode == 55) {
     return getHtmlPic("icons2/raining.png", height, "dense drizzle")
   } else if (weatherCode == 56) {
@@ -75,13 +75,13 @@ function getWeatherImg(weatherCode, height) {
   } else if (weatherCode == 57) {
     return getHtmlPic("icons2/raining.png", height, "dense Freezing Drizzle")
   } else if (weatherCode == 61) {
-    return getHtmlPic("icons2/stormrainnn.png", height, "slight rain")
+    return getHtmlPic("icons2/raining.png", height, "slight rain")
   } else if (weatherCode == 63) {
-    return getHtmlPic("icons2/stormrainnn.png", height, "moderate rain")
+    return getHtmlPic("icons2/raining.png", height, "moderate rain")
   } else if (weatherCode == 65) {
     return getHtmlPic("icons2/stormrainnn.png", height, "heavy  rain")
   } else if (weatherCode == 66) {
-    return getHtmlPic("icons2/stormrainnn.png", height, " Light Freezing Rain")
+    return getHtmlPic("icons2/raining.png", height, " Light Freezing Rain")
   } else if (weatherCode == 67) {
     return getHtmlPic("icons2/stormrainnn.png", height, "heavy intensity Freezing Rain")
   } else if (weatherCode == 71) {
@@ -93,11 +93,11 @@ function getWeatherImg(weatherCode, height) {
   } else if (weatherCode == 77) {
     return getHtmlPic("icons2/snow.png", height, "Snow grains")
   } else if (weatherCode == 80) {
-    return getHtmlPic("icons2/stormrainnn.png", height, "Rain showers: Slight")
+    return getHtmlPic("icons2/raining.png", height, "slight rain showers")
   } else if (weatherCode == 81) {
-    return getHtmlPic("icons2/stormrainnn.png", height, "moderate Rain showers")
+    return getHtmlPic("icons2/raining.png", height, "moderate rain showers")
   } else if (weatherCode == 82) {
-    return getHtmlPic("icons2/stormrainnn.png", height, "violent Rain showers")
+    return getHtmlPic("icons2/stormrainnn.png", height, "violent rain showers")
   } else if (weatherCode == 85) {
     return getHtmlPic("icons2/snow.png", height, "Snow showers slight")
   } else if (weatherCode == 86) {
@@ -265,7 +265,7 @@ wind: ${outWimdSp}km/h  ${windDir}`; // TODO: remove arrow
 
     // WIND ICON
     let wind_img = getWindImg(item.winddirection_10m, item.wimdsp, 100);
-    console.log(`typeof wind_img: ${typeof(wind_img)}`)
+    // console.log(`typeof wind_img: ${typeof(wind_img)}`)
     if (typeof (wind_img) != "undefined") {
       wind_img.className = 'big';
       li.appendChild(wind_img);
