@@ -21,10 +21,10 @@ p {
     max-height: fit-content;
     display: flex;
     align-items:center;
-    /* grid-template-columns: auto auto auto auto auto; */
     column-gap: 5px;
     padding: 7px; 
     margin: 5px;
+
     /* border: 1px solid red; */
 }
 .night {
@@ -33,22 +33,24 @@ p {
 
 }
 .day {
-
-    background-color: rgb(126, 192, 197);
+    background-color: rgb(139, 188, 192);
+    color: rgb(18, 38, 80) ;
 }
 
 .separator {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: aliceblue;
+    font-size: 120%;
     background-color: rgb(18, 38, 80);
     border-radius: 15px;
-    max-width:fit-content;
+    max-width:100%;
     max-height: fit-content;
-    display: grid;
-    grid-template-columns: auto;
+    display: flex;
+    align-content:center;
     column-gap: 5px;
     padding: 7px; 
     margin: 5px;
+    text-align: center;
 }
 
 

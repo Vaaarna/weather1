@@ -11,14 +11,18 @@ class oneHourData {
     this.winddirection_10m = winddirection_10m;
     this.is_day = is_day
   }
-
-  // isGoodForBike() { //checks if weather is good for bikig. later add items to remmeber if sunny if rainy if cold
-  //   if (this.temperature < 15) {
-  //     return false
-  //   }
-  //   return true;
-  // }
 }
+class dayData {
+  constructor(weathercode, temperature_2m_max, temperature_2m_min, precipitation_probability_max, windspeed_10m_max, winddirection_10m_dominant) {
+    this.weathercode = weathercode;
+    this.temperature_2m_max = temperature_2m_max;
+    this.temperature_2m_min = temperature_2m_min;
+    this.precipitation_probability_max = precipitation_probability_max;
+    this.windspeed_10m_max = windspeed_10m_max;
+    this.winddirection_10m_dominant = winddirection_10m_dominant
+  }
+}
+
 function checkTime(i) { //make time 4:0 into 04:00
   if (i < 10) {
     i = "0" + i;
@@ -148,14 +152,13 @@ function windDirArrows(i) {
 }
 
 function getWindImg(windDirection, windSpeed, height) {
-  if (windSpeed < 5){
+  if (windSpeed < 5) {
     return undefined
   }
 
+
   let img = getHtmlPic("icons2/arrow_finalV3_rinalds_parpucis_9a.png", height, "wind arrow")
-  
   let scale_factor
-  
   if (windSpeed > 25) {
     scale_factor = 1
   } else {
@@ -164,6 +167,15 @@ function getWindImg(windDirection, windSpeed, height) {
   img.style.transform = `scale(${scale_factor}, ${scale_factor}) rotate(${windDirection}deg)`
   return img
 }
+const dayNames = new Map([
+  [1, "pirmdiena"],
+  [2, "otrdiena"],
+  [3, "trešdiena"],
+  [4, "ceturdiena"],
+  [5, "piektdiena"],
+  [6, "sestdiena"],
+  [0, "svetdiena"],
+])
 
 
 async function getWeather() {
@@ -175,16 +187,36 @@ async function getWeather() {
   // okai
   // const url = `https://api.open-meteo.com/v1/forecast?latitude=56.95&longitude=24.11&hourly=temperature_2m,apparent_temperature,precipitation_probability,weathercode,windspeed_10m,winddirection_10m&forecast_days=3`;
 
-  // https://api.open-meteo.com/v1/forecast?latitude=56.95&longitude=24.11&hourly=temperature_2m,apparent_temperature,precipitation_probability,weathercode,windspeed_10m,winddirection_10m,is_day&forecast_days=3&timezone=auto
-  const url = `https://api.open-meteo.com/v1/forecast?latitude=56.95&longitude=24.11&hourly=temperature_2m,apparent_temperature,precipitation_probability,weathercode,windspeed_10m,winddirection_10m,is_day&forecast_days=3&timezone=auto`;
+
+  // const url = `https://api.open-meteo.com/v1/forecast?latitude=56.95&longitude=24.11&hourly=temperature_2m,apparent_temperature,precipitation_probability,weathercode,windspeed_10m,winddirection_10m,is_day&forecast_days=3&timezone=auto`;
+  // const url = `https://api.open-meteo.com/v1/forecast/?latitude=56.959&longitude=24.061&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max,windspeed_10m_max,winddirection_10m_dominant&hourly=temperature_2m,apparent_temperature,precipitation_probability,weathercode,windspeed_10m,winddirection_10m,is_day&forecast_days=3&timezone=auto`;
+  // url.searchParams.append('hourly', 'temperature_2m,apparent_temperature,precipitation_probability,weathercode,windspeed_10m,winddirection_10m');
+  var url = new URL('https://api.open-meteo.com/v1/forecast/')
+  url.searchParams.append('latitude', 56.959);
+  url.searchParams.append('longitude', 24.061);
+  url.searchParams.append('daily', 'weathercode');
+  url.searchParams.append('daily', 'temperature_2m_max');
+  url.searchParams.append('daily', 'temperature_2m_min');
+  url.searchParams.append('daily', 'precipitation_probability_max');
+  url.searchParams.append('daily', 'windspeed_10m_max');
+  url.searchParams.append('daily', 'winddirection_10m_dominant');
+
+  url.searchParams.append('hourly', 'temperature_2m');
+  url.searchParams.append('hourly', 'apparent_temperature');
+  url.searchParams.append('hourly', 'precipitation_probability');
+  url.searchParams.append('hourly', 'weathercode');
+  url.searchParams.append('hourly', 'windspeed_10m');
+  url.searchParams.append('hourly', 'winddirection_10m');
+  url.searchParams.append('hourly', 'is_day');
+
+  url.searchParams.append('timezone', 'auto');
+
   const data = await getData(url);
 
   console.log({ data });
 
   const oneHourArr = []
-
   for (let i = 0; i < data["hourly"]["time"].length; i++) {
-
     let thisHourObj = new oneHourData( //salikt stundai klat atbilstosos datus
       new Date(data["hourly"]["time"][i]), //turn weird date into uniform simple date
       data["hourly"]["temperature_2m"][i],
@@ -197,9 +229,16 @@ async function getWeather() {
       data["hourly"]["is_day"][i]
     )
     oneHourArr.push(thisHourObj)
-
   }
   console.log(oneHourArr)
+
+  // const dayArr = []
+  // for (let i = 0; data["dayly"][]) {
+
+  // }
+
+
+
 
 
 
@@ -211,7 +250,9 @@ async function getWeather() {
     }
 
     let outH = checkTime(item.time.getHours());
-    let outMin = checkTime(item.time.getMinutes());
+    // let outMin = checkTime(item.time.getMinutes());
+    let outDate = item.time.getDate()
+    let outDayName = dayNames.get(item.time.getDay())
     let outTemp = Math.round(item.temperature);
     let outWimdSp = Math.round(item.wimdsp);
     let realFeel = Math.round(item.apparent_temperature);
@@ -271,24 +312,25 @@ wind: ${outWimdSp}km/h  ${windDir}`; // TODO: remove arrow
       li.appendChild(wind_img);
     }
 
-
-
     // var elemDiv3 = document.createElement('div');
     // elemDiv3.className = 'big';
     // elemDiv3.innerHTML = `->`;
     // li.appendChild(elemDiv3);
-
-
     // li.innerText = `${outH}:${outMin}    temp: ${outTemp}°C (feels like: ${realFeel}°C), ${}, prec.prob: ${precipitationProb}%, wimd: ${outWimdSp}km/h ${windDir}`;
 
 
     if (item.time.getHours() == 0) {
-      var dividerItem = document.createElement("li");
-      var divDivi = document.createElement('div');
-      divDivi.className = 'separator big';
-      divDivi.innerHTML = "⁺˚*•̩̩͙✩•̩̩͙* ˚ ⁺‧͙ · 。ﾟ☆: *.☽ .* :☆ﾟ. ⁺ ˚ *•̩̩͙✩•̩̩͙*˚⁺";
-      dividerItem.appendChild(divDivi);
-      list.appendChild(dividerItem);
+      var dividerListItem = document.createElement("li");
+      var dateDiv = document.createElement('div');
+      dateDiv.className = 'separator';
+      dateDiv.innerHTML = `${outDate} ${outDayName} ⁺˚*•̩̩͙✩•̩̩͙* ˚ ⁺‧͙ · 。ﾟ☆: *.  ☽  .* :☆ﾟ. ⁺ ˚ *•̩̩͙✩•̩̩͙*˚⁺`;
+      dividerListItem.appendChild(dateDiv);
+      list.appendChild(dividerListItem);
+
+      // var designDiv = document.createElement('div');
+      // designDiv.className = 'separator';
+      // designDiv.innerHTML ="";
+      // dividerListItem.appendChild(designDiv);
       //   let seperator = 
       //   seperator.innerText = "⁺˚*•̩̩͙✩•̩̩͙* ˚ ⁺‧͙ · 。ﾟ☆: *.☽ .* :☆ﾟ. ⁺ ˚ *•̩̩͙✩•̩̩͙*˚⁺"
 
