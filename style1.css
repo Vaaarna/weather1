@@ -65,7 +65,13 @@ p {
     text-align: left;
     /* grid-column: 1 / span 3; */
     /* border: 1px solid purple; */
-
-
-
+}
+.list1 {
+    /* list-style-type: none;
+     display: inline-block; */
+     float:left;
+     width:50%;
+    }
+.list2 {
+    float:right;
 }
