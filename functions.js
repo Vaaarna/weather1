@@ -180,7 +180,7 @@ function getDayLi(dayData) {
     let outWindDomDir = windDirArrows(dayData.winddirection_10m_dominant);
 
     let li = document.createElement("li");
-    li.className = "dayList list day";
+    li.className = "dayListItem day";
 
     // datums dienas nosaukums
     var DivD1 = document.createElement("div");
@@ -228,9 +228,9 @@ function getHourLi(hourData) {
 
     let li = document.createElement("li");
     if (hourData.is_day == 1) {
-        li.className = "hourSubItem list day";
+        li.className = "hourSubItem day";
     } else if (hourData.is_day == 0) {
-        li.className = "hourSubItem list night";
+        li.className = "hourSubItem night";
     } else {
         li.className = "separator";
     }
@@ -378,7 +378,7 @@ async function getWeather() {
 
         let hoursForThisDay = dayHourMap.get(thisDay.time.getDate());
         let hoursSubList = document.createElement("ul");
-        hoursSubList.className = "hourSubList list";
+        hoursSubList.className = "hourSubList";
         for (let i = 0; i < hoursForThisDay.length; i++) {
             hoursSubList.appendChild(hoursForThisDay[i]);
         }

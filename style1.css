@@ -8,16 +8,16 @@ html {
     font-size: 200%;
     font-weight: 500;
 }
-.list {
-    border-radius: 15px;
-    max-width: fit-content;
-    max-height: fit-content;
-}
-.dayList {
-    padding: 7px;
-    margin: 5px;
 
-    border: 1px solid red;
+.dayListItem {
+    list-style-type: none;
+    width: 550px;
+    padding: 7px;
+    margin: 40px;
+    border-radius: 15px;
+    box-shadow: 10px 10px 50px black;
+    
+    /* border: 1px solid red; */
 }
 .night {
     background-color: rgb(18, 38, 80);
@@ -32,22 +32,29 @@ html {
     display: block;
     list-style-type: none;
     padding-left: 0;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
 }
 .hourSubItem {
-    border: 1px solid green;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /*  https://www.reddit.com/r/css/comments/q791ts/css_flex_explained_in_1_animation/?ref=share&ref_source=link */
+    margin: 10px;
+    padding-left: 10px;
+    border-radius: 15px;
+    box-shadow: 3px 3px 9px rgba(0, 0, 0, 0.8);
+    /* border: 2px solid green; */
 }
 .big {
     font-size: 100%;
     text-align: center;
     display: inline-block;
 
-    border: 1px solid yellow;
+    /* border: 1px solid lime; */
 }
 .small {
     font-size: 50%;
     text-align: left;
     display: inline-block;
 
-    border: 1px solid yellow;
+    /* border: 1px solid lime; */
 }
