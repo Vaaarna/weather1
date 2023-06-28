@@ -7,57 +7,55 @@ html {
 }
 
 p {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     /* font-size: 17px; */
     /* text-decoration: solid rgb(51, 50, 8); */
 }
 
 .konteiners {
-    font-family: 'Garamond', serif;
+    font-family: "Garamond", serif;
     font-size: 200%;
     font-weight: 500;
     border-radius: 15px;
-    max-width:fit-content;
+    max-width: fit-content;
     max-height: fit-content;
     display: flex;
-    align-items:center;
+    align-items: center;
     column-gap: 5px;
-    padding: 7px; 
+    padding: 7px;
     margin: 5px;
 
     /* border: 1px solid red; */
 }
 .night {
     background-color: rgb(18, 38, 80);
-    color:aliceblue;
-
+    color: aliceblue;
 }
 .day {
     background-color: rgb(139, 188, 192);
-    color: rgb(18, 38, 80) ;
+    color: rgb(18, 38, 80);
 }
 
 .separator {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     color: aliceblue;
     font-size: 120%;
     background-color: rgb(18, 38, 80);
     border-radius: 15px;
-    max-width:100%;
+    max-width: 100%;
     max-height: fit-content;
     display: flex;
-    align-content:center;
+    align-content: center;
     column-gap: 5px;
-    padding: 7px; 
+    padding: 7px;
     margin: 5px;
     text-align: center;
 }
 
-
 .big {
     font-size: 100%;
     text-align: center;
-     /* border: 1px solid blue; */
+    /* border: 1px solid blue; */
 }
 
 .small {
@@ -69,9 +67,42 @@ p {
 .list1 {
     /* list-style-type: none;
      display: inline-block; */
-     float:left;
-     width:50%;
-    }
+    float: left;
+    width: 50%;
+}
 .list2 {
-    float:right;
+    float: right;
+}
+/* (A) CONTAINER
+.collapse,
+.collapse ul {
+    list-style-type: none;
+    padding-left: 10px;
+}
+
+/* (B) LIST ITEMS */
+/* .collapse li {
+    padding: 10px;
+} */
+
+/* (C) TOGGLE */
+.toggle {
+    padding: 10px;
+    cursor: pointer;
+}
+.toggle::before {
+    display: inline-block;
+    width: 15px;
+    content: "+";
+}
+.toggle.show::before {
+    content: "-";
+}
+
+/* (D) SHOW/HIDE */
+.collapse ul {
+    display: none;
+}
+.toggle.show + ul {
+    display: block;
 }

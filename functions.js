@@ -170,6 +170,120 @@ function getWindImg(windDirection, windSpeed, height) {
     img.style.transform = `scale(${scale_factor}, ${scale_factor}) rotate(${windDirection}deg)`;
     return img;
 }
+function getDayLi(dayData) {
+    let outDate = dayData.time.getDate();
+    let outDayName = dayNames.get(dayData.time.getDay());
+    let outTempMax = Math.round(dayData.temperature_2m_max);
+    let outTempMin = Math.round(dayData.temperature_2m_min);
+    let outWimdMaxSp = Math.round(dayData.windspeed_10m_max);
+    let outPrecipiMaxProb = dayData.precipitation_probability_max;
+    let outWindDomDir = windDirArrows(dayData.winddirection_10m_dominant);
+
+    let li = document.createElement("li");
+    li.className = "konteiners day";
+
+    // datums dienas nosaukums
+    var DivD1 = document.createElement("div");
+    DivD1.className = "big";
+    DivD1.innerHTML = `${outDate}. <br> ${outDayName}`;
+    li.appendChild(DivD1);
+    // ikona
+    weather_image = getWeatherImg(dayData.weathercode, 100);
+    if (typeof weather_image != "undefined") {
+        weather_image.className = "big";
+        li.appendChild(weather_image);
+    }
+    // temperatura
+    var DivD2 = document.createElement("div");
+    DivD2.className = "big";
+    DivD2.innerHTML = `${outTempMax}°C <br> ${outTempMin} °C `;
+    li.appendChild(DivD2);
+    // small
+    var DivD3 = document.createElement("div");
+    DivD3.className = "small";
+    DivD3.innerHTML = `precipitation: ${outPrecipiMaxProb}% <br>
+wind: ${outWimdMaxSp}km/h  ${outWindDomDir}`;
+    li.appendChild(DivD3);
+    // weathervane
+
+    let wind_img = getWindImg(dayData.winddirection_10m_dominant, dayData.windspeed_10m_max, 100);
+    if (typeof wind_img != "undefined") {
+        wind_img.className = "big";
+        li.appendChild(wind_img);
+    }
+    return li;
+}
+function getHourLi(hourData) {
+    let outH = checkTime(hourData.time.getHours());
+    // let outMin = checkTime(item.time.getMinutes());
+    let outDate = hourData.time.getDate();
+    let outDayName = dayNames.get(hourData.time.getDay());
+    let outTemp = Math.round(hourData.temperature);
+    let outWimdSp = Math.round(hourData.wimdsp);
+    let precipitationProb = hourData.precipitation_probability;
+    let windDir = windDirArrows(hourData.winddirection_10m);
+    let realFeel = Math.round(hourData.apparent_temperature);
+
+    // create weather hour list
+
+    let li = document.createElement("li");
+    if (hourData.is_day == 1) {
+        li.className = "konteiners day";
+    } else if (hourData.is_day == 0) {
+        li.className = "konteiners night";
+    } else {
+        li.className = "separator";
+    }
+
+    // STUNDAS
+    var divH1 = document.createElement("div");
+    divH1.className = "big";
+    divH1.innerHTML = `${outH}⁰⁰`;
+    li.appendChild(divH1);
+
+    // ICONA
+    let weather_image;
+    if (hourData.is_day == 0) {
+        weather_image = getMooned(hourData.weathercode, 100);
+    } else {
+        weather_image = getWeatherImg(hourData.weathercode, 100);
+    }
+    if (typeof weather_image != "undefined") {
+        weather_image.className = "big";
+        li.appendChild(weather_image);
+    }
+    // TEMP
+    var divH2 = document.createElement("div");
+    divH2.className = "big";
+    divH2.innerHTML = `${outTemp}` + "°C";
+    li.appendChild(divH2);
+
+    // SMAL
+    var divH4 = document.createElement("div");
+    divH4.className = "small";
+    divH4.innerHTML = `feels like: ${realFeel}°C <br>
+    precipitation: ${precipitationProb}% <br>
+    wind: ${outWimdSp}km/h  ${windDir}`;
+    li.appendChild(divH4);
+
+    // WIND ICON
+    let wind_img = getWindImg(hourData.winddirection_10m, hourData.wimdsp, 100);
+    if (typeof wind_img != "undefined") {
+        wind_img.className = "big";
+        li.appendChild(wind_img);
+    }
+
+    // if (hourData.time.getHours() == 0) {
+    //     var dividerListItem = document.createElement("li");
+    //     var dateDiv = document.createElement("div");
+    //     dateDiv.className = "separator";
+    //     dateDiv.innerHTML = `${outDate}. ${outDayName} ⁺˚*•̩̩͙✩•̩̩͙* ˚ ⁺‧͙ · 。ﾟ☆: *.  ☽  .* :☆ﾟ. ⁺ ˚ *•̩̩͙✩•̩̩͙*˚⁺`;
+    //     dividerListItem.appendChild(dateDiv);
+    //     listH.appendChild(dividerListItem);
+    // }
+    return li;
+}
+
 const dayNames = new Map([
     [1, "pirmdiena"],
     [2, "otrdiena"],
@@ -206,7 +320,14 @@ async function getWeather() {
 
     url.searchParams.append("timezone", "auto");
 
-    const data = await getData(url);
+    let data;
+    try {
+        data = await getData(url);
+    } catch (err) {
+        var errorMsg = document.getElementById("errorMsg");
+        errorMsg.innerHTML = `YOUVE DONE SHITTED THE PANTS ${err.message}`;
+        throw new Error(`YOUVE DONE SHITTED THE PANTS ${err.message}`);
+    }
 
     console.log({ data });
 
@@ -244,134 +365,31 @@ async function getWeather() {
 
     for (i = 0; i < oneHourArr.length; i++) {
         //iterates trough each item puts on a list in the frontend allegedly
-        let item = oneHourArr[i];
-        if (item.time < Date.now()) {
+        if (oneHourArr[i].time < Date.now()) {
             continue;
         }
-
-        let outH = checkTime(item.time.getHours());
-        // let outMin = checkTime(item.time.getMinutes());
-        let outDate = item.time.getDate();
-        let outDayName = dayNames.get(item.time.getDay());
-        let outTemp = Math.round(item.temperature);
-        let outWimdSp = Math.round(item.wimdsp);
-        let precipitationProb = item.precipitation_probability;
-        let windDir = windDirArrows(item.winddirection_10m);
-        let realFeel = Math.round(item.apparent_temperature);
-
-        // create weather hour list
         let listH = document.getElementById("hWeatherOutputList");
         listH.className = "list1";
-
-        let li = document.createElement("li");
-        if (item.is_day == 1) {
-            li.className = "konteiners day";
-        } else if (item.is_day == 0) {
-            li.className = "konteiners night";
-        } else {
-            li.className = "separator";
-        }
-
-        // STUNDAS
-        var divH1 = document.createElement("div");
-        divH1.className = "big";
-        divH1.innerHTML = `${outH}⁰⁰`;
-        li.appendChild(divH1);
-
-        // ICONA
-        let weather_image;
-        if (item.is_day == 0) {
-            weather_image = getMooned(item.weathercode, 100);
-        } else {
-            weather_image = getWeatherImg(item.weathercode, 100);
-        }
-        if (typeof weather_image != "undefined") {
-            weather_image.className = "big";
-            li.appendChild(weather_image);
-        }
-        // TEMP
-        var divH2 = document.createElement("div");
-        divH2.className = "big";
-        divH2.innerHTML = `${outTemp}` + "°C";
-        li.appendChild(divH2);
-
-        // SMAL
-        var divH4 = document.createElement("div");
-        divH4.className = "small";
-        divH4.innerHTML = `feels like: ${realFeel}°C <br>
-    precipitation: ${precipitationProb}% <br>
-    wind: ${outWimdSp}km/h  ${windDir}`;
-        li.appendChild(divH4);
-
-        // WIND ICON
-        let wind_img = getWindImg(item.winddirection_10m, item.wimdsp, 100);
-        if (typeof wind_img != "undefined") {
-            wind_img.className = "big";
-            li.appendChild(wind_img);
-        }
-
-        if (item.time.getHours() == 0) {
-            var dividerListItem = document.createElement("li");
-            var dateDiv = document.createElement("div");
-            dateDiv.className = "separator";
-            dateDiv.innerHTML = `${outDate} ${outDayName} ⁺˚*•̩̩͙✩•̩̩͙* ˚ ⁺‧͙ · 。ﾟ☆: *.  ☽  .* :☆ﾟ. ⁺ ˚ *•̩̩͙✩•̩̩͙*˚⁺`;
-            dividerListItem.appendChild(dateDiv);
-            listH.appendChild(dividerListItem);
-        }
-
-        listH.appendChild(li);
+        listH.appendChild(getHourLi(oneHourArr[i]));
     }
 
     for (i = 0; i < dayArr.length; i++) {
         //iterates trough each item puts on a list in the frontend allegedly
-        let item = dayArr[i];
-
-        let outDate = item.time.getDate();
-        let outDayName = dayNames.get(item.time.getDay());
-        let outTempMax = Math.round(item.temperature_2m_max);
-        let outTempMin = Math.round(item.temperature_2m_min);
-        let outWimdMaxSp = Math.round(item.windspeed_10m_max);
-        let outPrecipiMaxProb = item.precipitation_probability_max;
-        let outWindDomDir = windDirArrows(item.winddirection_10m_dominant);
 
         let listD = document.getElementById("DWeatherOutputList");
-        // list.className = 'list2';
-        // let list3 = document.createElement("ul");
-        let li = document.createElement("li");
-        li.className = "konteiners day";
-        // datums dienas nosaukums
-        var DivD1 = document.createElement("div");
-        DivD1.className = "big";
-        DivD1.innerHTML = `${outDate}. <br> ${outDayName}`;
-        li.appendChild(DivD1);
-        // ikona
-        weather_image = getWeatherImg(item.weathercode, 100);
-        if (typeof weather_image != "undefined") {
-            weather_image.className = "big";
-            li.appendChild(weather_image);
-        }
-        // temperatura
-        var DivD2 = document.createElement("div");
-        DivD2.className = "big";
-        DivD2.innerHTML = `${outTempMax}°C <br> ${outTempMin} °C `;
-        li.appendChild(DivD2);
-        // small
-        var DivD3 = document.createElement("div");
-        DivD3.className = "small";
-        DivD3.innerHTML = `precipitation: ${outPrecipiMaxProb}% <br>
-wind: ${outWimdMaxSp}km/h  ${outWindDomDir}`;
-        li.appendChild(DivD3);
-        // weathervane
+        listD.appendChild(getDayLi(dayArr[i]));
 
-        let wind_img = getWindImg(item.winddirection_10m_dominant, item.windspeed_10m_max, 100);
-        if (typeof wind_img != "undefined") {
-            wind_img.className = "big";
-            li.appendChild(wind_img);
-        }
-
-        listD.appendChild(li);
+        // window.addEventListener("load", () => {
+        //     for (let i of document.querySelectorAll(".collapse ul")) {
+        //         let tog = document.createElement("div");
+        //         tog.innerHTML = i.previousSibling.textContent;
+        //         tog.className = "toggle";
+        //         tog.onclick = () => tog.classList.toggle("show");
+        //         i.parentElement.removeChild(i.previousSibling);
+        //         i.parentElement.insertBefore(tog, i);
+        //     }
+        // });
     }
 }
 
 getWeather();
-// document.getElementById("butt1").onclick = function () { getWeather() };
