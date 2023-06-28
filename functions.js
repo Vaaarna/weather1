@@ -272,15 +272,6 @@ function getHourLi(hourData) {
         wind_img.className = "big";
         li.appendChild(wind_img);
     }
-
-    // if (hourData.time.getHours() == 0) {
-    //     var dividerListItem = document.createElement("li");
-    //     var dateDiv = document.createElement("div");
-    //     dateDiv.className = "separator";
-    //     dateDiv.innerHTML = `${outDate}. ${outDayName} ⁺˚*•̩̩͙✩•̩̩͙* ˚ ⁺‧͙ · 。ﾟ☆: *.  ☽  .* :☆ﾟ. ⁺ ˚ *•̩̩͙✩•̩̩͙*˚⁺`;
-    //     dividerListItem.appendChild(dateDiv);
-    //     listH.appendChild(dividerListItem);
-    // }
     return li;
 }
 
@@ -363,21 +354,36 @@ async function getWeather() {
     }
     console.log(dayArr);
 
+    var dayHourMap = new Map(); //saves Date : hours weather for that day array
+
     for (i = 0; i < oneHourArr.length; i++) {
         //iterates trough each item puts on a list in the frontend allegedly
         if (oneHourArr[i].time < Date.now()) {
             continue;
         }
-        let listH = document.getElementById("hWeatherOutputList");
-        listH.className = "list1";
-        listH.appendChild(getHourLi(oneHourArr[i]));
+        var thisDate = oneHourArr[i].time.getDate();
+        if (dayHourMap.has(thisDate) == false) {
+            dayHourMap.set(thisDate, []);
+        }
+        var DayHourArr = dayHourMap.get(thisDate);
+        DayHourArr.push(getHourLi(oneHourArr[i]));
     }
+    console.log(dayHourMap);
 
     for (i = 0; i < dayArr.length; i++) {
         //iterates trough each item puts on a list in the frontend allegedly
-
+        const thisDay = dayArr[i];
         let listD = document.getElementById("DWeatherOutputList");
-        listD.appendChild(getDayLi(dayArr[i]));
+        let li = getDayLi(thisDay);
+
+        let hoursForThisDay = dayHourMap.get(dayArr[i].time.getDate());
+        console.log(dayArr[i].time.getDate());
+        let hoursSubList = document.createElement("ul");
+        for (let i = 0; i < hoursForThisDay.length; i++) {
+            hoursSubList.appendChild(hoursForThisDay[i]);
+        }
+        li.appendChild(hoursSubList);
+        listD.appendChild(li);
 
         // window.addEventListener("load", () => {
         //     for (let i of document.querySelectorAll(".collapse ul")) {
