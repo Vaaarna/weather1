@@ -180,7 +180,7 @@ function getDayLi(dayData) {
     let outWindDomDir = windDirArrows(dayData.winddirection_10m_dominant);
 
     let li = document.createElement("li");
-    li.className = "konteiners day";
+    li.className = "dayList list day";
 
     // datums dienas nosaukums
     var DivD1 = document.createElement("div");
@@ -228,9 +228,9 @@ function getHourLi(hourData) {
 
     let li = document.createElement("li");
     if (hourData.is_day == 1) {
-        li.className = "konteiners day";
+        li.className = "hourSubItem list day";
     } else if (hourData.is_day == 0) {
-        li.className = "konteiners night";
+        li.className = "hourSubItem list night";
     } else {
         li.className = "separator";
     }
@@ -374,16 +374,16 @@ async function getWeather() {
         //iterates trough each item puts on a list in the frontend allegedly
         const thisDay = dayArr[i];
         let listD = document.getElementById("DWeatherOutputList");
-        let li = getDayLi(thisDay);
+        let Dayli = getDayLi(thisDay);
 
-        let hoursForThisDay = dayHourMap.get(dayArr[i].time.getDate());
-        console.log(dayArr[i].time.getDate());
+        let hoursForThisDay = dayHourMap.get(thisDay.time.getDate());
         let hoursSubList = document.createElement("ul");
+        hoursSubList.className = "hourSubList list";
         for (let i = 0; i < hoursForThisDay.length; i++) {
             hoursSubList.appendChild(hoursForThisDay[i]);
         }
-        li.appendChild(hoursSubList);
-        listD.appendChild(li);
+        Dayli.appendChild(hoursSubList);
+        listD.appendChild(Dayli);
 
         // window.addEventListener("load", () => {
         //     for (let i of document.querySelectorAll(".collapse ul")) {

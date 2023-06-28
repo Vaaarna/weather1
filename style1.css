@@ -4,28 +4,20 @@ html {
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
-}
-
-p {
-    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-    /* font-size: 17px; */
-    /* text-decoration: solid rgb(51, 50, 8); */
-}
-
-.konteiners {
     font-family: "Garamond", serif;
     font-size: 200%;
     font-weight: 500;
+}
+.list {
     border-radius: 15px;
     max-width: fit-content;
     max-height: fit-content;
-    display: flex;
-    align-items: center;
-    column-gap: 5px;
+}
+.dayList {
     padding: 7px;
     margin: 5px;
 
-    /* border: 1px solid red; */
+    border: 1px solid red;
 }
 .night {
     background-color: rgb(18, 38, 80);
@@ -36,73 +28,26 @@ p {
     color: rgb(18, 38, 80);
 }
 
-.separator {
-    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-    color: aliceblue;
-    font-size: 120%;
-    background-color: rgb(18, 38, 80);
-    border-radius: 15px;
-    max-width: 100%;
-    max-height: fit-content;
-    display: flex;
-    align-content: center;
-    column-gap: 5px;
-    padding: 7px;
-    margin: 5px;
-    text-align: center;
+.hourSubList {
+    display: block;
+    list-style-type: none;
+    padding-left: 0;
+    border: 1px solid blue;
 }
-
+.hourSubItem {
+    border: 1px solid green;
+}
 .big {
     font-size: 100%;
     text-align: center;
-    /* border: 1px solid blue; */
-}
+    display: inline-block;
 
+    border: 1px solid yellow;
+}
 .small {
     font-size: 50%;
     text-align: left;
-    /* grid-column: 1 / span 3; */
-    /* border: 1px solid purple; */
-}
-.list1 {
-    /* list-style-type: none;
-     display: inline-block; */
-    float: left;
-    width: 50%;
-}
-.list2 {
-    float: right;
-}
-/* (A) CONTAINER
-.collapse,
-.collapse ul {
-    list-style-type: none;
-    padding-left: 10px;
-}
-
-/* (B) LIST ITEMS */
-/* .collapse li {
-    padding: 10px;
-} */
-
-/* (C) TOGGLE */
-.toggle {
-    padding: 10px;
-    cursor: pointer;
-}
-.toggle::before {
     display: inline-block;
-    width: 15px;
-    content: "+";
-}
-.toggle.show::before {
-    content: "-";
-}
 
-/* (D) SHOW/HIDE */
-.collapse ul {
-    display: none;
-}
-.toggle.show + ul {
-    display: block;
+    border: 1px solid yellow;
 }
