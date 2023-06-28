@@ -8,7 +8,8 @@ class oneHourData {
         weathercode,
         windspeed_10m,
         winddirection_10m,
-        is_day
+        is_day,
+        uv_index
     ) {
         this.time = time;
         this.temperature = temperature;
@@ -19,6 +20,7 @@ class oneHourData {
         this.windspeed_10m = windspeed_10m;
         this.winddirection_10m = winddirection_10m;
         this.is_day = is_day;
+        this.uv_index = uv_index;
     }
 }
 class dayData {
@@ -264,6 +266,11 @@ function getHourLi(hourData) {
     divH4.innerHTML = `feels like: ${realFeel}°C <br>
     precipitation: ${precipitationProb}% <br>
     wind: ${outWimdSp}km/h  ${windDir}`;
+
+    if (hourData.uv_index >= 5){
+      divH4.innerHTML += `<br>UV index: ${Math.round(hourData.uv_index)}⚠️`
+    }
+
     li.appendChild(divH4);
 
     // WIND ICON
@@ -308,6 +315,7 @@ async function getWeather() {
     url.searchParams.append("hourly", "windspeed_10m");
     url.searchParams.append("hourly", "winddirection_10m");
     url.searchParams.append("hourly", "is_day");
+    url.searchParams.append("hourly", "uv_index");
 
     url.searchParams.append("timezone", "auto");
 
@@ -333,7 +341,8 @@ async function getWeather() {
             data["hourly"]["weathercode"][i],
             data["hourly"]["windspeed_10m"][i],
             data["hourly"]["winddirection_10m"][i],
-            data["hourly"]["is_day"][i]
+            data["hourly"]["is_day"][i],
+            data["hourly"]["uv_index"][i]
         );
         oneHourArr.push(thisHourObj);
     }
