@@ -385,6 +385,9 @@ async function getWeather() {
         let listD = document.getElementById("DWeatherOutputList");
         let Dayli = getDayLi(thisDay);
 
+        if (!dayHourMap.has(thisDay.time.getDate())){
+            continue;
+        }
         let hoursForThisDay = dayHourMap.get(thisDay.time.getDate());
         let hoursSubList = document.createElement("ul");
         hoursSubList.className = "hourSubList";
@@ -408,3 +411,9 @@ async function getWeather() {
 }
 
 getWeather();
+
+
+// Taksks:
+// 1. Put all of the elements highlighted in screen.png into a div element.
+// 2. Style that new div element simmiliarly to .hourSubItem, so that the items are all alighned propperly.
+// 3. Make sure that layout works on mobile as well.
